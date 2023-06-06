@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Rock Paper Scissors</title>
+  <style>
+    .game-btn {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin-right: 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Rock Paper Scissors</h1>
+
+  <div>
+    <button class="game-btn" onclick="playGame('rock')">Rock</button>
+    <button class="game-btn" onclick="playGame('paper')">Paper</button>
+    <button class="game-btn" onclick="playGame('scissors')">Scissors</button>
+  </div>
+
+  <h2 id="result">Make your move!</h2>
+
+  <script>
+    function playGame(userChoice) {
+      var choices = ["rock", "paper", "scissors"];
+      var computerChoice = choices[Math.floor(Math.random() * choices.length)];
+
+      var result = determineWinner(userChoice, computerChoice);
+      var message = "You chose " + userChoice + ". Computer chose " + computerChoice + ". ";
+
+      if (result === "tie") {
+        message += "It's a tie!";
+      } else if (result === "win") {
+        message += "You win!";
+      } else {
+        message += "Computer wins!";
+      }
+
+      document.getElementById("result").innerText = message;
+    }
+
+    function determineWinner(userChoice, computerChoice) {
+      if (userChoice === computerChoice) {
+        return "tie";
+      }
+
+      if (
+        (userChoice === "rock" && computerChoice === "scissors") ||
+        (userChoice === "paper" && computerChoice === "rock") ||
+        (userChoice === "scissors" && computerChoice === "paper")
+      ) {
+        return "win";
+      }
+
+      return "lose";
+    }
+  </script>
+</body>
+</html>
